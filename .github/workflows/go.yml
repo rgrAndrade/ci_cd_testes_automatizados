@@ -15,7 +15,7 @@ jobs:
     runs-on: ${{ matrix.os}}
     env:
       HOST: localhost
-      PORT: 5432
+      DBPORT: 5432
       USER: root
       PASSWORD: root
       DBNAME: root      
@@ -58,9 +58,12 @@ jobs:
         path: main
 
 
-
-
   docker:
     needs: build
     uses: ./.github/workflows/Docker.yml 
-    secrets: inherit     
+    secrets: inherit 
+    
+  Deploy_EC2:
+    needs: build
+    uses: ./.github/workflows/EC2.yml 
+    secrets: inherit        
