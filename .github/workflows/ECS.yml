@@ -17,3 +17,26 @@ jobs:
 
     - name: obtendo arquivo da tarefa
       run: aws ecs describe-task-definition --task-definition Tarefa_API-go --query taskDefinition > task-definition.json 
+
+    - name: Fill in the new image ID in the Amazon ECS task definition
+      id: task-def
+      uses: aws-actions/amazon-ecs-render-task-definition@v1
+      with:
+        task-definition: task-definition.json
+        container-name: Go
+        image: rgrandrade/ci_cd_testes_automatizados:main
+        environment-variables: |
+          HOST=${{ secrets.DBHOST }}
+          USER=${{ secrets.DBUSER }}
+          PASSWORD=${{ secrets.DBPASSWORD }}
+          DBNAME=${{ secrets.DBNAME }}
+          DBPORT=${{ secrets.DBPORT }}
+          PORT=8000
+
+    - name: Deploy Amazon ECS task definition
+      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      with:
+        task-definition: ${{ steps.task-def.outputs.task-definition }}
+        service: Servico-API-Go
+        cluster: api-go
+        wait-for-service-stability: true      
