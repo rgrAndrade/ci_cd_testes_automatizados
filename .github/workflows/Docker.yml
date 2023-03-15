@@ -45,7 +45,7 @@ jobs:
         # Push is a shorthand for --output=type=registry
         push: true
         # List of tags
-        tags:  rgrandrade/ci_cd_testes_automatizados:${{github.ref_name}}        
+        tags:  rgrandrade/ci_cd_testes_automatizados:${{github.run_number}}        
 
 
 

@@ -24,7 +24,7 @@ jobs:
       with:
         task-definition: task-definition.json
         container-name: Go
-        image: rgrandrade/ci_cd_testes_automatizados:main
+        image: rgrandrade/ci_cd_testes_automatizados:${{github.run_number}}
         environment-variables: |
           HOST=${{ secrets.DBHOST }}
           USER=${{ secrets.DBUSER }}
