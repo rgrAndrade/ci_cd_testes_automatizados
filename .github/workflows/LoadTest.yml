@@ -13,8 +13,8 @@ jobs:
     - name: configurando credenciais da AWS
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        aws-access-key-id: ${{ secrets.ID_CHAVE_ACESSO }}
-        aws-secret-access-key: ${{ secrets.CHAVE_SECRETA }}
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-2
         
     - run: git clone https://github.com/leollo98/Infra_CI
