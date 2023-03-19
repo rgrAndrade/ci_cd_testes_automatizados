@@ -77,6 +77,6 @@ jobs:
 
   LoadTest:
       needs: docker
-      if: ${{ github.ref_name == 'main' }}
+      if: ${{ github.ref_name == 'homolog' }}
       uses: ./.github/workflows/LoadTest.yml
       secrets: inherit            

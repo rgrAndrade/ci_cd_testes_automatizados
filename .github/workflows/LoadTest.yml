@@ -17,18 +17,18 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-2
         
-    - run: git clone https://github.com/rgrAndrade/iinfra_ci.git
+    - run: git clone https://github.com/leollo98/Infra_CI
     
     - name: HashiCorp - Setup Terraform
       uses: hashicorp/setup-terraform@v2.0.3
       
-    - run: terraform -chdir=iinfra_ci/env/Homolog init
+    - run: terraform -chdir=Infra_CI/env/Homolog init
     
-    - run: terraform -chdir=iinfra_ci/env/Homolog destroy -auto-approve
+    - run: terraform -chdir=Infra_CI/env/Homolog destroy -auto-approve
       
-    - run: terraform -chdir=iinfra_ci/env/Homolog apply -auto-approve
+    - run: terraform -chdir=Infra_CI/env/Homolog apply -auto-approve
     
-    - run: echo "$(terraform -chdir=iinfra_ci/env/Homolog output -raw IP_alb)"
+    - run: echo "$(terraform -chdir=Infra_CI/env/Homolog output -raw IP_alb)"
       id: URL
       
     - name: Setup Python
@@ -53,6 +53,6 @@ jobs:
         echo "	tasks = [UserTasks]" >> locustfile.py
         echo "	wait_time = between(1, 5)" >> locustfile.py
     - name: Roda teste de carga
-      run: sleep 59s ; locust -f locustfile.py --headless -u 10 -r 5 --run-time 60s -H http://${{ steps.URL.outputs.stdout }}
+      run: sleep 60s ; locust -f locustfile.py --headless -u 10 -r 5 --run-time 60s -H http://${{ steps.URL.outputs.stdout }}
       
-    - run: terraform -chdir=iinfra_ci/env/Homolog destroy -auto-approve
+    - run: terraform -chdir=Infra_CI/env/Homolog destroy -auto-approve
