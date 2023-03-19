@@ -17,7 +17,7 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-2
         
-    - run: git clone https://github.com/rgrAndrade/iinfra_ci.git
+    - run: git clone ttps://github.com/leollo98/Infra_CI
     
     - name: HashiCorp - Setup Terraform
       uses: hashicorp/setup-terraform@v2.0.3
